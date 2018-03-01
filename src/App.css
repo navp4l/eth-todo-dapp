@@ -61,3 +61,10 @@ code {
   height: 16px;
   margin-right: 10px;
 }
+
+.alignCentre {
+  position:relative;
+  transition: .5s ease;
+  top: 50%;
+  left: 20%;
+}

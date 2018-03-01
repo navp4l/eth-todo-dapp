@@ -10,6 +10,8 @@ import './App.css'
 import TodoItems from './TodoItems'
 import './TodoItems.css'
 
+import Loading from 'react-loading-spinner';
+
 const contract = require('truffle-contract')
 const todo = contract(TodoContract)
 
@@ -19,12 +21,14 @@ class App extends Component {
     super(props)
 
     this.state = {
+      isLoadingContent : false,
       todoItems: [],
       defaultAccount: "",
       web3: null
     }
 
     this.addTodoItem = this.addTodoItem.bind(this);
+    this.editTodoItem = this.editTodoItem.bind(this);
     this.deleteListItem = this.deleteListItem.bind(this);
     this.resetTodo = this.resetTodo.bind(this);
 
@@ -59,10 +63,15 @@ class App extends Component {
   instantiateContract = async function() {
 
     todo.setProvider(this.state.web3.currentProvider)
-
+    this.setState({
+      isLoadingContent : true
+    });
     var items = await this.getListItems();
     this.setState({
       todoItems : items
+    });
+    this.setState({
+      isLoadingContent : false
     });
     console.log("After get items :: " + JSON.stringify(this.state.todoItems));
   }
@@ -94,6 +103,23 @@ class App extends Component {
 
     //reset input value
     this.inputVal.value = "";
+  }
+
+  editTodoItem = async function(key, value) {
+    let items = this.state.todoItems;
+    if(value !== "") {
+      let listSize = this.state.todoItems.length;
+      let success = await this.addItem({
+        key : key,
+        textVal : value
+      });
+    }
+    var newItems = await this.getListItems();
+    this.setState({
+      todoItems : newItems
+    });
+
+    console.log("After add item :: " + JSON.stringify(this.state.todoItems));
   }
 
   deleteListItem = async function(key) {
@@ -211,16 +237,18 @@ class App extends Component {
         </nav>
 
         <main id="container" className="container">
-          <div className="todoListMainDiv">
-            <div className="header">
-              <form onSubmit={this.addTodoItem}>
-                <input ref={(a) => this.inputVal = a} placeholder="Enter Task details" type="text" />
-                <button type="submit">Add Task</button>
-              </form>
-              <button onClick={this.resetTodo}>Reset List</button>
+          <Loading isLoading={this.state.isLoadingContent} loadingClassName='loading'>
+            <div className="todoListMainDiv">
+              <div className="header">
+                <form onSubmit={this.addTodoItem}>
+                  <input ref={(a) => this.inputVal = a} placeholder="Enter Task details" type="text" />
+                  <button type="submit">Add Task</button>
+                </form>
+                <button className="alignCentre" onClick={this.resetTodo}>Reset List</button>
+              </div>
+              <TodoItems updateHandler={this.editTodoItem} items={this.state.todoItems} deleteListItem={this.deleteListItem} />
             </div>
-            <TodoItems items={this.state.todoItems} deleteListItem={this.deleteListItem} />
-          </div>
+          </Loading>
         </main>
 
       </div>
