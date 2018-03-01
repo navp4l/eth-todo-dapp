@@ -19,7 +19,7 @@ contract Todo {
     event LogItemAdded(uint position);
     event LogItemUpdated(uint position);
     event LogItemRemoved(uint position);
-    event TodoListReset();
+    event LogTodoListReset();
 
     /**
     @notice Add or Update task
@@ -88,7 +88,7 @@ contract Todo {
         for (uint i = 0; i < keys.length - 1; i++) {
             delete tasks[keys[i]];
         }
-        TodoListReset();
+        LogTodoListReset();
         keys.length = 0;
     }
 

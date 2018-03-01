@@ -98,7 +98,7 @@ contract('Todo', async (accounts) => {
 
     for(let i = 0; i < deletionTxn.logs.length; i++) {
       let log = deletionTxn.logs[i];
-      assert.isTrue(log.event == "TodoListReset", 'TodoListReset event not fired');
+      assert.isTrue(log.event == "LogTodoListReset", 'LogTodoListReset event not fired');
     }
     let listSizeAfterReset = await contractInstance.getSize.call();
     assert.equal(listSizeAfterReset.toNumber(), 0, 'Size of the list incorrect');
