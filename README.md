@@ -33,7 +33,7 @@ A Simple ToDo DApp build on the Ethereum platform using the Truffle React box.
 #### Adding tasks / items to the ToDo list
 When items are added to the list, they are listed with the latest item shown on top.
 
-
+![alt afterAddingItems][images/afterAddingItems.png]
 
 
 #### Editing tasks / items in the ToDo list
