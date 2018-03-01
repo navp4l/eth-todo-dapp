@@ -33,11 +33,11 @@ A Simple ToDo DApp build on the Ethereum platform using the Truffle React box.
 #### Adding tasks / items to the ToDo list
 When interacting with the DApp, any transaction that requires an update to the values in the blockchain will need gas and so Metamask is shown in such scenarios.
 
-![alt whenInteracting](images/whenInteracting.png)
+![alt whenInteracting](images/whenInteracting.png) <!-- .element height="50%" width="50%" -->
 
 When items are added to the list, they are listed with the latest item shown on top.
 
-![alt afterAddingItems](images/afterAddingItems.png)
+![alt afterAddingItems](images/afterAddingItems.png) <!-- .element height="50%" width="50%" -->
 
 #### Removing tasks / items from the ToDo list
 Items in the list can be removed by clicking on the *X* mark
@@ -45,21 +45,21 @@ in the list item.
 
 After *Add Truffle Contract Tests* and *Setup Truffle React module* tasks are deleted
 
-![alt afterDelete](images/afterDelete.png)
+![alt afterDelete](images/afterDelete.png) <!-- .element height="50%" width="50%" -->
 
 #### Editing tasks / items in the ToDo list
 When clicking on an existing row like *Using Truffle build contracts*, inline editing is enabled and the value of the task can be updated inline.
 
-![alt inlineEdit](images/inlineEdit.png)
+![alt inlineEdit](images/inlineEdit.png) <!-- .element height="50%" width="50%" -->
 
 After changing the value, there is a new button with a *tick symbol* which appears and on clicking this, Metamask pops up for confirmation post which the updated value is saved to the blockchain.
 
-![alt inlineEditConfirm](images/inlineEditConfirm.png)
+![alt inlineEditConfirm](images/inlineEditConfirm.png) <!-- .element height="50%" width="50%" -->
 
 #### Resetting the entire ToDo list
 On clicking the `Reset List` button the entire list is reset and all the tasks are removed.
 
-![alt afterReset](images/afterReset.png)
+![alt afterReset](images/afterReset.png) <!-- .element height="50%" width="50%" -->
 
 ### Tasks
 * [x] Smart contracts
