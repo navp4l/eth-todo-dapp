@@ -9,6 +9,8 @@ import './App.css'
 
 import TodoItems from './TodoItems'
 import './TodoItems.css'
+import Spinner from './Spinner'
+import './Spinner.css'
 
 import Loading from 'react-loading-spinner';
 
@@ -68,9 +70,7 @@ class App extends Component {
     });
     var items = await this.getListItems();
     this.setState({
-      todoItems : items
-    });
-    this.setState({
+      todoItems : items,
       isLoadingContent : false
     });
     console.log("After get items :: " + JSON.stringify(this.state.todoItems));
@@ -80,23 +80,25 @@ class App extends Component {
     event.preventDefault();
 
     let items = this.state.todoItems;
+    this.setState({
+      isLoadingContent : true
+    });
+
     if(this.inputVal.value !== "") {
       let listSize = this.state.todoItems.length;
       let success = await this.addItem({
         key : listSize + 1,
         textVal : this.inputVal.value
       });
-
+      var newItems;
       if(success){
-        items.unshift({
-          key : listSize + 1,
-          textVal : this.inputVal.value
-        })
+        newItems = await this.getListItems();
       }
     }
 
     this.setState({
-      todoItems : items
+      todoItems : newItems,
+      isLoadingContent : false
     });
 
     console.log("After add item :: " + JSON.stringify(this.state.todoItems))
@@ -108,6 +110,9 @@ class App extends Component {
   editTodoItem = async function(key, value) {
     let items = this.state.todoItems;
     if(value !== "") {
+      this.setState({
+        isLoadingContent : true
+      });
       let listSize = this.state.todoItems.length;
       let success = await this.addItem({
         key : key,
@@ -116,30 +121,38 @@ class App extends Component {
     }
     var newItems = await this.getListItems();
     this.setState({
-      todoItems : newItems
+      todoItems : newItems,
+      isLoadingContent : false
     });
-
     console.log("After add item :: " + JSON.stringify(this.state.todoItems));
   }
 
   deleteListItem = async function(key) {
     let items = this.state.todoItems;
+    this.setState({
+      isLoadingContent : true
+    });
     let success = await this.deleteItem(key);
     var newItems =[];
     if(success) {
       newItems = await this.getListItems();
       this.setState({
-        todoItems : newItems
+        todoItems : newItems,
+        isLoadingContent : false
       });
     }
     console.log("After delete item :: " + JSON.stringify(this.state.todoItems))
   }
 
   resetTodo = async function(key) {
+    this.setState({
+      isLoadingContent : true
+    });
     let success = await this.resetList();
     if(success) {
       this.setState({
-        todoItems : []
+        todoItems : [],
+        isLoadingContent : false
       });
     }
     console.log("After resetting item :: " + JSON.stringify(this.state.todoItems))
@@ -175,7 +188,7 @@ class App extends Component {
     let itemVal = todoItem.textVal;
     let itemKey = todoItem.key;
     let returnVal = false;
-    let txn = await todoInstance.addOrUpdate(itemKey, itemVal, {from : this.state.defaultAccount, gas : 115000});
+    let txn = await todoInstance.addOrUpdate(itemKey, itemVal, {from : this.state.defaultAccount, gas : 115000, gasPrice : 100000000000});
     for(let i = 0; i < txn.logs.length; i++) {
       let log = txn.logs[0];
       if(log.event === "LogItemAdded") {
@@ -191,7 +204,7 @@ class App extends Component {
     let itemVal = todoItem.textVal;
     let itemKey = todoItem.key;
     let returnVal = false;
-    let txn = await todo.addOrUpdate(itemKey, itemVal, {from : this.state.defaultAccount, gas : 115000});
+    let txn = await todo.addOrUpdate(itemKey, itemVal, {from : this.state.defaultAccount, gas : 115000, gasPrice : 100000000000});
     for(let i = 0; i < txn.logs.length; i++) {
       let log = txn.logs[0];
       if(log.event === "LogItemUpdated") {
@@ -205,7 +218,7 @@ class App extends Component {
     var todoInstance = await todo.deployed();
 
     let returnVal = false;
-    let txn = await todoInstance.remove(position, {from : this.state.defaultAccount, gas : 115000});
+    let txn = await todoInstance.remove(position, {from : this.state.defaultAccount, gas : 115000, gasPrice : 100000000000});
     for(let i = 0; i < txn.logs.length; i++) {
       let log = txn.logs[0];
       if(log.event === "LogItemRemoved") {
@@ -219,7 +232,7 @@ class App extends Component {
     var todoInstance = await todo.deployed();
 
     let returnVal = false;
-    let txn = await todoInstance.deleteTodo({from : this.state.defaultAccount, gas : 115000});
+    let txn = await todoInstance.deleteTodo({from : this.state.defaultAccount, gas : 115000, gasPrice : 100000000000});
     for(let i = 0; i < txn.logs.length; i++) {
       let log = txn.logs[0];
       if(log.event === "LogTodoListReset") {
@@ -237,7 +250,7 @@ class App extends Component {
         </nav>
 
         <main id="container" className="container">
-          <Loading isLoading={this.state.isLoadingContent} loadingClassName='loading'>
+          <Loading isLoading={this.state.isLoadingContent} spinner={Spinner} loadingClassName='loading'>
             <div className="todoListMainDiv">
               <div className="header">
                 <form onSubmit={this.addTodoItem}>
