@@ -100,5 +100,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "postinstall": "webpack -p --config ./config/webpack.config.prod.js --progress"
 }
