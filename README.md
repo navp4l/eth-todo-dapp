@@ -20,7 +20,7 @@ A Simple ToDo DApp build on the Ethereum platform using the Truffle React box.
 * Ropsten test net ethers
 * Metamask
 
->Load `https://limitless-taiga-87984.herokuapp.com/` on a browser with Metamask connected to `Ropsten test network`.
+>Load [https://limitless-taiga-87984.herokuapp.com/](https://limitless-taiga-87984.herokuapp.com/) on a browser with Metamask connected to `Ropsten test network`.
 
 **Faucet to get Ropsten test net ethers - https://faucet.bitfwd.xyz/**
 
