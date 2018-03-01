@@ -1,10 +1,5 @@
 /* PAGE */
 
-body,
-.pure-g [class*=pure-u] {
-  font-family: 'Open Sans', sans-serif;
-}
-
 h1, h2, h3 {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
@@ -20,6 +15,11 @@ code {
   box-sizing: border-box;
   width: 100%;
   padding: 45px 20px;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
 }
 
 .pure-button-primary {
@@ -43,14 +43,9 @@ code {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
-.navbar a {
+.navbar span {
   color: #fff;
-}
-
-.navbar a:active,
-.navbar a:focus,
-.navbar a:hover {
-  background: #233e5e;
+  text-align: center;
 }
 
 .navbar .pure-menu-heading {
