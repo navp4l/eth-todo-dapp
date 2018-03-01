@@ -3,7 +3,18 @@
 ## Overview
 A Simple ToDo DApp build on the Ethereum platform using the Truffle React box.
 
+## Accessing the app running on Ropsten testnet
+
 **Note:** Contract is deployed on Ropsten Testnet at **[0x919D4eB9280c826f7dD89637A9E26d884B2EFa25](https://ropsten.etherscan.io/address/0x919d4eb9280c826f7dd89637a9e26d884b2efa25)** deployed through account [0x0e21b8e4e49fa6e9994fa125bcdf0979734774ff](https://ropsten.etherscan.io/address/0x0e21b8e4e49fa6e9994fa125bcdf0979734774ff)
+
+### Prerequisites
+
+* Ropsten test net ethers
+* Metamask
+
+>Load `https://limitless-taiga-87984.herokuapp.com/` on a browser with Metamask connected to `Ropsten test network`.
+
+**Faucet to get Ropsten test net ethers - https://faucet.bitfwd.xyz/**
 
 ## Running the app locally
 
@@ -14,7 +25,6 @@ A Simple ToDo DApp build on the Ethereum platform using the Truffle React box.
 * Solidity - solc v0.4.19 or above
 * Ganache
 * Metamask
-* Ropsten (if interacting with contract deployed on Ropsten)
 
 ### Instructions
 
