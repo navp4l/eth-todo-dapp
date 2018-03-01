@@ -246,14 +246,13 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-            <span className="pure-menu-heading pure-menu-link">TO-DO LIST</span>
+            <span className="pure-menu-heading">TO-DO LIST</span>
         </nav>
-
         <main id="container" className="container">
           <Loading isLoading={this.state.isLoadingContent} spinner={Spinner} loadingClassName='loading'>
             <div className="todoListMainDiv">
               <div className="header">
-                <form onSubmit={this.addTodoItem}>
+                <form className="form-todo" onSubmit={this.addTodoItem}>
                   <input ref={(a) => this.inputVal = a} placeholder="Enter Task details" type="text" />
                   <button type="submit">Add Task</button>
                 </form>
@@ -263,7 +262,6 @@ class App extends Component {
             </div>
           </Loading>
         </main>
-
       </div>
     );
   }
