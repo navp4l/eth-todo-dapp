@@ -90,7 +90,18 @@ contract('Todo', async (accounts) => {
 
     let itemFromListAfterDelete11 = await contractInstance.getItem.call(1);
     assert.equal(itemFromListAfterDelete11, itemFromListAfterDelete10, 'Item not delted from list');
+  });
 
+  it('Testing deletion of entire Todo list', async () => {
+    const contractInstance = await Todo.deployed();
+    let deletionTxn = await contractInstance.deleteTodo();
+
+    for(let i = 0; i < deletionTxn.logs.length; i++) {
+      let log = deletionTxn.logs[i];
+      assert.isTrue(log.event == "TodoListReset", 'TodoListReset event not fired');
+    }
+    let listSizeAfterReset = await contractInstance.getSize.call();
+    assert.equal(listSizeAfterReset.toNumber(), 0, 'Size of the list incorrect');
   });
 
 });

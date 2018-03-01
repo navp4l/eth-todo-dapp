@@ -19,6 +19,7 @@ contract Todo {
     event LogItemAdded(uint position);
     event LogItemUpdated(uint position);
     event LogItemRemoved(uint position);
+    event TodoListReset();
 
     /**
     @notice Add or Update task
@@ -78,6 +79,17 @@ contract Todo {
     function getItem(uint _position) public view returns (string _task) {
         uint key = keys[_position - 1];
         _task = tasks[key];
+    }
+
+    /**
+    @notice Delete Todo list
+    */
+    function deleteTodo() public {
+        for (uint i = 0; i < keys.length - 1; i++) {
+            delete tasks[keys[i]];
+        }
+        TodoListReset();
+        keys.length = 0;
     }
 
 }
