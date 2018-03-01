@@ -85,7 +85,7 @@ contract Todo {
     @notice Delete Todo list
     */
     function deleteTodo() public {
-        for (uint i = 0; i < keys.length - 1; i++) {
+        for (uint i = 0; i < keys.length; i++) {
             delete tasks[keys[i]];
         }
         LogTodoListReset();
