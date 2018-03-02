@@ -213,3 +213,4 @@ On clicking the `Reset List` button the entire list is reset and all the tasks a
     * React App related files and changes are available in the `src\` directory
 * [x] Deploy and test locally
 * [x] Deploy and test on Ropsten
+* [x] Add Geth scripts
